@@ -54,9 +54,4 @@ Hosted on Vercel
 
 ---
 
-## Contact Information
-Hitesh Bhor
-Email: hiteshbhor28@gmail.com
-GitHub: https://github.com/Hitesh-Bhor28
-LinkedIn: https://www.linkedin.com/in/hitesh-bhor/
 
