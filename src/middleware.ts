@@ -1,0 +1,27 @@
+
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+
+export function middleware(request: NextRequest) {
+  const session = request.cookies.get('session')?.value;
+  const { pathname } = request.nextUrl;
+
+  // Protected routes
+  const isProtectedRoute = pathname.startsWith('/dashboard') || pathname.startsWith('/account');
+  // Auth routes
+  const isAuthRoute = pathname.startsWith('/login') || pathname.startsWith('/signup');
+
+  if (isProtectedRoute && !session) {
+    return NextResponse.redirect(new URL('/login', request.url));
+  }
+
+  if (isAuthRoute && session) {
+    return NextResponse.redirect(new URL('/dashboard', request.url));
+  }
+
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
+};
